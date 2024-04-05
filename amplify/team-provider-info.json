@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-osdproject-dev-bbbc6-authRole",
+      "UnauthRoleArn": "arn:aws:iam::465006229972:role/amplify-osdproject-dev-bbbc6-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::465006229972:role/amplify-osdproject-dev-bbbc6-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-osdproject-dev-bbbc6-deployment",
+      "UnauthRoleName": "amplify-osdproject-dev-bbbc6-unauthRole",
+      "StackName": "amplify-osdproject-dev-bbbc6",
+      "StackId": "arn:aws:cloudformation:eu-west-1:465006229972:stack/amplify-osdproject-dev-bbbc6/3493a470-f038-11ee-8c1c-024e3be41e63",
+      "AmplifyAppId": "d29lzw07ut0ktv"
+    },
+    "categories": {
+      "auth": {
+        "osdproject56fc5d9b": {}
+      }
+    }
+  }
+}

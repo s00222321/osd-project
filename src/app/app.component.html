@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<div class="container">
+  <amplify-authenticator>
+    <ng-template amplifySlot="authenticated" let-user="user" let-signOut="signOut">
+      <mat-toolbar color="primary">
+        <span class="logo-icon"><i class="fas fa-project-diagram"></i></span>
+        <span class="project-title">The Project Manager</span>
+        <span class="toolbar-spacer"></span>
+        <ng-container *ngIf="authenticator.authStatus=='authenticated'">
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
+            <mat-icon>menu</mat-icon>
+          </button>
+        </ng-container>
+        <ng-container *ngIf="authenticator.authStatus=='authenticated'">
+          <button mat-raised-button color="accent" (click)="signOut()">Sign out</button>
+        </ng-container>
+      </mat-toolbar>
+      <mat-menu #menu="matMenu">
+        <a mat-menu-item routerLink="/" routerLinkActive="active">Home</a>
+        <ng-container *ngIf="!isUserAdmin()">
+          <a mat-menu-item [routerLink]="['/', userId, 'projects']" routerLinkActive="active">Projects</a>
+        </ng-container>
+        <ng-container *ngIf="isUserAdmin()">
+          <a mat-menu-item [routerLink]="['/', 'admindashboard', userId]" routerLinkActive="active">Dashboard</a>
+        </ng-container>
+      </mat-menu>
+      <router-outlet></router-outlet>
+    </ng-template>
+  </amplify-authenticator>
+  
+</div>

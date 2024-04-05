@@ -1,0 +1,78 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<!-- Spinner -->
+<div *ngIf="loading; else projectDetails" class="spinner-container">
+  <mat-progress-spinner mode="indeterminate" diameter="100" class="spinner"></mat-progress-spinner>
+</div>
+<div>
+
+  <ng-template #projectDetails>
+    <div *ngIf="project && !showForm" class="container">
+      <h1>{{ project.title }}</h1>
+      <p>{{ project.description }}</p>
+      <div class="progress-container">
+        <mat-progress-bar mode="determinate" [value]="percentageComplete"></mat-progress-bar>
+        <span class="progress-label">{{ percentageComplete }}% Complete</span>
+    </div>
+    
+      <p><i class="far fa-calendar-alt"></i> {{ project.dueDate | date:'dd-MM-yyyy'}}</p>
+      <button mat-raised-button color="primary"
+      [routerLink]="['/projects/tasksform']" [queryParams]="{projectId: project._id, projectName: project.title }"
+        class="stackable-button">
+        <i class="fas fa-plus"></i> Add New Task
+      </button>
+
+      <!-- Dropdown -->
+      <mat-form-field class="stackable-field">
+        <mat-label>Filter Tasks</mat-label>
+        <mat-select [(ngModel)]="taskFilter" (selectionChange)="filterTasks()">
+          <mat-option value="all">All</mat-option>
+          <mat-option value="completed">Completed</mat-option>
+          <mat-option value="notcompleted">Not Completed</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <br>
+
+      <div *ngIf="tasks && tasks.length > 0; else noTasksMessage" class="card-container responsive-grid">
+        <div *ngFor="let task of tasks" class="task-card grid-item">
+            <mat-card class="dark-outline">
+                <mat-card-header>
+                    <mat-card-title>{{ task.title }}</mat-card-title>
+                    <div class="icon-container">
+                        <i class="fas fa-{{ task.isCompleted ? 'times' : 'check' }} icon" 
+                            [ngClass]="task.isCompleted ? 'warn' : 'primary'"
+                            (click)="completeTask(task, task.isCompleted)">
+                        </i>
+                        <i class="fas fa-trash icon" 
+                            (click)="deleteTask(task)">
+                        </i>
+                        <i class="fas fa-edit icon" 
+                            [routerLink]="['/projects/tasksform']"
+                            [queryParams]="{ task: stringifyTask(task), projectId: project._id, projectName: project.title }">
+                        </i>
+                    </div>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>{{ task.description }}</p>
+                            <p [ngClass]="getPriorityClass(task.priority)">{{ task.priority }}</p>
+                            <p>
+                                <i class="far fa-calendar-alt"></i> {{ task.dueDate | date:'dd-MM-yyyy' }}
+                                <span *ngIf="isOverdue(task.dueDate)" class="overdue">Overdue</span>
+                            </p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    <ng-template #noTasksMessage>
+        <p>No tasks match</p>
+    </ng-template>
+    
+      <br>
+      {{ message }}
+      <button mat-raised-button color="primary" [routerLink]="['/', userId, 'projects']">
+        <i class="fas fa-arrow-left"></i> Go Back
+      </button>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,46 @@
+<div class="textalign">
+    <h1>Admin Dashboard</h1>
+    <h4>Select a user to see their information</h4>
+  </div>
+  
+  <div class="container">
+    <div *ngIf="filteredUsers && filteredUsers.length > 0; else noUsersMessage" class="card-container responsive-grid">
+      <div *ngFor="let user of filteredUsers">
+        <mat-card class="dark-outline user-card" (click)="selectUser(user)">
+          <mat-card-content>
+            <mat-card-title>
+              <i class="fas fa-user fa-2x"></i> <!-- Font Awesome user icon -->
+              {{ user.email }}
+            </mat-card-title>
+            <p class="user-details">User ID: {{ user._id }}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <ng-template #noUsersMessage>
+      <p>No users available</p>
+    </ng-template>
+  </div>
+  
+  <div *ngIf="selectedUser && selectedProjects" class="container">
+    <mat-card class="dark-outline">
+      <mat-card-content>
+        <div *ngFor="let project of selectedProjects">
+          <mat-card class="dark-outline project-card">
+            <mat-card-content>
+              <mat-card-title>
+                <i class="fas fa-project-diagram fa-lg"></i> <!-- Font Awesome project icon -->
+                {{ project.title }}
+              </mat-card-title>
+              <p>Due: {{ project.dueDate | date:'dd-MM-yyyy'}}</p>
+              <p class="project-description">{{ project.description }}</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <ng-template #noProjectsMessage>
+      <p>No projects for this user</p>
+    </ng-template>
+  </div>
+  

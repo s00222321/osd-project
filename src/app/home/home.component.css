@@ -1,0 +1,46 @@
+.container {
+    padding: 50px;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .container {
+    text-align: center;
+  }
+
+  .feature-card {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .feature-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  .quote-section {
+    margin-top: 50px;
+    padding: 20px;
+    border-left: 5px solid #007bff; /* Change the border color as needed */
+    background-color: #f9f9f9; /* Change the background color as needed */
+  }
+  
+  blockquote {
+    font-style: italic;
+  }
+  
+  p {
+    margin-bottom: 20px;
+  }
+  
+  .author {
+    text-align: right;
+  }
+  

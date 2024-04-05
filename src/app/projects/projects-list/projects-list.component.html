@@ -1,0 +1,41 @@
+<div class="container responsive-grid" *ngIf="!showForm">
+  <h1>Projects</h1>
+
+  <button mat-raised-button color="primary" [routerLink]="['/', userId, 'projects','form']">
+    <mat-icon>add</mat-icon>Add New Project
+  </button>
+
+  <!-- Spinner -->
+  <div *ngIf="loading; else projectsList" class="spinner-container">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <ng-template #projectsList>
+    <div *ngFor="let project of projects$ | async">
+
+      <mat-card class="dark-outline">
+        <mat-card-header>
+          <mat-card-title>{{ project.title }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card-content">
+          <div class="flex-container">
+            <p>
+              Due: {{ project.dueDate | date:'dd-MM-yyyy' }}
+              <!-- <span *ngIf="isOverdue(project.dueDate)" class="overdue">Overdue</span> -->
+            </p>
+            <div class="flex-item flex-grow"></div>
+            <div class="flex-item">
+              <a mat-raised-button color="primary" [routerLink]="['/', userId, 'projects', project._id]">View details</a>
+              <mat-icon class="delete-icon" (click)="deleteProject(project)">delete</mat-icon>
+              <mat-icon class="edit-icon" [routerLink]="['/', userId, 'projects','form']" [queryParams]="{ project: stringifyProject(project)}">edit</mat-icon>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </ng-template>
+</div>
