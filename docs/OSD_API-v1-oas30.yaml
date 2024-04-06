@@ -1,0 +1,323 @@
+openapi: "3.0.1"
+info:
+  title: "OSD_API"
+  version: "2024-03-30T17:22:24Z"
+servers:
+  - url: "https://4tj9hau93k.execute-api.eu-west-1.amazonaws.com/{basePath}"
+    variables:
+      basePath:
+        default: "v1"
+paths:
+  /users:
+    get:
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserList"
+    post:
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /users/{user_id}:
+    get:
+      parameters:
+        - name: "user_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    put:
+      parameters:
+        - name: "user_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    delete:
+      parameters:
+        - name: "user_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /users/{user_id}/projects:
+    get:
+      parameters:
+        - name: "user_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectList"
+    post:
+      parameters:
+        - name: "user_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+  /users/{user_id}/projects/{project_id}:
+    get:
+      parameters:
+        - name: "project_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "user_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+    put:
+      parameters:
+        - name: "project_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "user_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+    delete:
+      parameters:
+        - name: "project_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "user_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+  /users/{user_id}/projects/{project_id}/tasks:
+    get:
+      parameters:
+        - name: "project_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "user_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskList"
+    post:
+      parameters:
+        - name: "project_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "user_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+  /users/{user_id}/projects/{project_id}/tasks/{task_id}:
+    put:
+      parameters:
+        - name: "task_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "project_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "user_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+    delete:
+      parameters:
+        - name: "task_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "project_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "user_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+  /{email}:
+    get:
+      parameters:
+        - name: "email"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+components:
+  schemas:
+    User:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        name:
+          type: "string"
+        email:
+          type: "string"
+      required:
+        - id
+        - name
+        - email
+    Project:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        name:
+          type: "string"
+        description:
+          type: "string"
+        user_id:
+          type: "string"
+      required:
+        - id
+        - name
+        - user_id
+    Task:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        name:
+          type: "string"
+        description:
+          type: "string"
+        user_id:
+          type: "string"
+        project_id:
+          type: "string"
+      required:
+        - id
+        - name
+        - user_id
+        - project_id
+    UserList:
+      type: "array"
+      items:
+        $ref: "#/components/schemas/User"
+    ProjectList:
+      type: "array"
+      items:
+        $ref: "#/components/schemas/Project"
+    TaskList:
+      type: "array"
+      items:
+        $ref: "#/components/schemas/Task"
+    Empty:
+      type: "object"
+      title: "Empty Schema"
